@@ -1,7 +1,7 @@
 from sympy.utilities.iterables import multiset_permutations
 import numpy as np
 
-class GiantSudoku:
+class Sudoku:
     def __init__(self):
         self.matrix = np.zeros((9,9))
         self.x = [None]*9
@@ -48,19 +48,19 @@ class GiantSudoku:
         for row in range(3,6):
             maskX = []
             for i in range(len(self.x[row])):
-                sum = self.intAt(self.x[row][i], 3)
-                sum+= self.intAt(self.x[row][i], 4)
-                sum+= self.intAt(self.x[row][i], 5)
-                maskX.append(sum==15)
+                s = self.intAt(self.x[row][i], 3)
+                s+= self.intAt(self.x[row][i], 4)
+                s+= self.intAt(self.x[row][i], 5)
+                maskX.append(s==15)
             self.x[row] = self.x[row][np.array(maskX)]
 
         for col in range(3, 6):
             maskY = []
             for i in range(len(self.y[col])):
-                sum = self.intAt(self.y[col][i], 3)
-                sum += self.intAt(self.y[col][i], 4)
-                sum += self.intAt(self.y[col][i], 5)
-                maskY.append(sum == 15)
+                s = self.intAt(self.y[col][i], 3)
+                s += self.intAt(self.y[col][i], 4)
+                s += self.intAt(self.y[col][i], 5)
+                maskY.append(s == 15)
             self.y[col] = self.y[col][np.array(maskY)]
 
     def intAt(self, num, pos):
